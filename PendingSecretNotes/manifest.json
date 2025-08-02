@@ -1,0 +1,10 @@
+﻿{
+  "Name": "Pending Secret Notes",
+  "Author": "John Peters (you know, the farmer?)",
+  "Version": "1.0.0",
+  "Description": "Highlight Secret Notes and Journal Scraps not yet followed up on.",
+  "UniqueID": "JohnPeters.PendingSecretNotes",
+  "EntryDll": "PendingSecretNotes.dll",
+  "MinimumApiVersion": "3.0.0",
+  "UpdateKeys": [ "Nexus:36265" ]
+}

@@ -1,0 +1,11 @@
+﻿{
+  "Format": "2.2.0",
+  "Changes": [
+    {
+      "LogName": "Pending Note or Scrap",
+      "Action": "Load",
+      "Target": "Mods/{{ModId}}/PendingNoteOrScrap",
+      "FromFile": "assets/PendingNoteOrScrap.png"
+    },
+  ]
+}
