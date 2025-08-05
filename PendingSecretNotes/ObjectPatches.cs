@@ -22,14 +22,20 @@ namespace PendingSecretNotes
             var srPendingSecretNote = Game1.getSourceRectForStandardTileSheet(texturePending, 0, 16, 16);
             var srPendingJournalScrap = Game1.getSourceRectForStandardTileSheet(texturePending, 1, 16, 16);
 
+            string[] noteData;
+            int noteKey;
+            bool noteSeen;
             foreach (var ctcSecretNote in __instance.collections[StardewValley.Menus.CollectionsPage.secretNotesTab][0])
             {
                 ModInstance.Monitor.Log($"[Pending Secret Notes] Checking {ctcSecretNote.name}", StardewModdingAPI.LogLevel.Trace);
 
                 // name = e.g. "1 True", "2 False"
-                var noteData = ctcSecretNote.name.Split(" ");
-                var noteKey = int.Parse(noteData[0]);
-                var noteSeen = bool.Parse(noteData[1]);
+                noteData = ctcSecretNote.name.Split(" ");
+                if (noteData.Length < 2 || !int.TryParse(noteData[0], out noteKey) || !bool.TryParse(noteData[1], out noteSeen))
+                {
+                    ModInstance.Monitor.Log($"[Pending Secret Notes] Failed to parse name, skipping: {ctcSecretNote.name}", StardewModdingAPI.LogLevel.Debug);
+                    continue;
+                }
                 if (noteSeen && IsNotePending(noteKey))
                 {
                     var isJournalScrap = (noteKey >= StardewValley.GameLocation.JOURNAL_INDEX);
@@ -86,6 +92,11 @@ namespace PendingSecretNotes
                     return !Game1.player.hasOrWillReceiveMail("Island_N_BuriedTreasure");
 
                 // Possible future improvement: add support for mods using Secret Note Framework
+                //   * More Secret Notes
+                //       - #30 - summit still blocked
+                //       - #36 - big tree not yet fallen
+                //       - #51 - custom arrowhead not yet found in backwoods
+                //       - #52 - custom statue not yet found in town
 
                 default:
                     return false;
